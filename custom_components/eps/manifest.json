@@ -1,0 +1,12 @@
+{
+  "domain": "eps",
+  "name": "Homiris EPS Alarm",
+  "version": "1.0.4",
+  "codeowners": ["@parvarm"],
+  "config_flow": true,
+  "documentation": "https://www.home-assistant.io/integrations/eps",
+  "iot_class": "cloud_polling",
+  "loggers": ["eps"],
+  "issue_tracker": "https://github.com/parvarm/epsHomeAssistant/issues",
+  "requirements": ["pyepsalarm==1.0.4"]
+}

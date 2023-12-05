@@ -1,0 +1,5 @@
+{
+  "name": "EPS Integration for Home Assistant",
+  "homeassistant": "2023.11",
+  "render_readme": true
+}

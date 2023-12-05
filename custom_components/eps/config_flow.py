@@ -51,7 +51,7 @@ class EPSConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                 _LOGGER.exception("Unexpected exception")
                 errors["base"] = "unknown"
 
-        if errors or (user_input is None):
+        if len(errors) > 0 or (user_input is None):
             return self.async_show_form(
                 step_id="user", data_schema=DATA_SCHEMA, errors=errors
             )

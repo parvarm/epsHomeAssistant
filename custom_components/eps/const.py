@@ -1,22 +1,13 @@
-"""Constants for the iAlarm integration."""
+"""Constants for the EPS integration."""
 from pyepsalarm import EPS
-
-from homeassistant.const import (
-    STATE_ALARM_ARMED_AWAY,
-    STATE_ALARM_ARMED_NIGHT,
-    STATE_ALARM_DISARMED,
-    STATE_ALARM_TRIGGERED,
-)
-
-DATA_COORDINATOR = "eps"
-
-DEFAULT_PORT = 18034
+from homeassistant.components.alarm_control_panel import AlarmControlPanelState
 
 DOMAIN = "eps"
+DATA_COORDINATOR = "eps"
 
 EPS_TO_HASS = {
-    EPS.ARMED_AWAY: STATE_ALARM_ARMED_AWAY,
-    EPS.ARMED_NIGHT: STATE_ALARM_ARMED_NIGHT,
-    EPS.DISARMED: STATE_ALARM_DISARMED,
-    EPS.TRIGGERED: STATE_ALARM_TRIGGERED,
+    EPS.ARMED_AWAY: AlarmControlPanelState.ARMED_AWAY,
+    EPS.ARMED_NIGHT: AlarmControlPanelState.ARMED_NIGHT,
+    EPS.DISARMED: AlarmControlPanelState.DISARMED,
+    EPS.TRIGGERED: AlarmControlPanelState.TRIGGERED,
 }

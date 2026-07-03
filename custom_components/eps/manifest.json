@@ -8,5 +8,5 @@
   "iot_class": "cloud_polling",
   "loggers": ["eps"],
   "issue_tracker": "https://github.com/parvarm/epsHomeAssistant/issues",
-  "requirements": ["pyepsalarm==1.0.6"]
+  "requirements": ["pyepsalarm@git+https://github.com/parvarm/pyepsalarm.git@1.0.6"]
 }

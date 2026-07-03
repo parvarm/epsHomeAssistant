@@ -21,7 +21,7 @@ class EPSDataUpdateCoordinator(DataUpdateCoordinator[None]):
     def __init__(self, hass: HomeAssistant, eps_api: EPS, site: str) -> None:
         """Initialize global EPS data updater."""
         self.eps_api = eps_api
-        self.state: str | None = None
+        self.state: AlarmControlPanelState | None = None
         self.site = site
         super().__init__(
             hass,

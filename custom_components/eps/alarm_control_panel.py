@@ -6,10 +6,10 @@ from homeassistant.components.alarm_control_panel import (
     AlarmControlPanelEntityFeature,
 )
 from homeassistant.config_entries import ConfigEntry
-from homeassistant.const import (
-    STATE_ALARM_ARMED_AWAY,
-    STATE_ALARM_ARMED_NIGHT,
-    STATE_ALARM_DISARMED,
+from homeassistant.components.alarm_control_panel import (
+    AlarmControlPanelEntity,
+    AlarmControlPanelEntityFeature,
+    AlarmControlPanelState,
 )
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.device_registry import DeviceInfo
@@ -49,7 +49,7 @@ class EPSPanel(CoordinatorEntity[EPSDataUpdateCoordinator], AlarmControlPanelEnt
         self._attr_unique_id = coordinator.site
 
     @property
-    def state(self) -> str | None:
+    def alarm_state(self) -> AlarmControlPanelState | None:
         """Return the state of the device."""
         return self.coordinator.state
 
@@ -58,7 +58,7 @@ class EPSPanel(CoordinatorEntity[EPSDataUpdateCoordinator], AlarmControlPanelEnt
         # The update takes roughly 5s to be applied, so we manually update it here.
         # In case it fails server side, it will be anyway updated at next scan
         if self.coordinator.eps_api.disarm(silent=True):
-            self.coordinator.state = STATE_ALARM_DISARMED
+            self.coordinator.state = AlarmControlPanelState.DISARMED
             self.schedule_update_ha_state()
 
     def alarm_arm_night(self, code: str | None = None) -> None:
@@ -66,7 +66,7 @@ class EPSPanel(CoordinatorEntity[EPSDataUpdateCoordinator], AlarmControlPanelEnt
         # The update takes roughly 5s to be applied, so we manually update it here.
         # In case it fails server side, it will be anyway updated at next scan
         if self.coordinator.eps_api.arm_night(silent=True):
-            self.coordinator.state = STATE_ALARM_ARMED_NIGHT
+            self.coordinator.state = AlarmControlPanelState.ARMED_NIGHT
             self.schedule_update_ha_state()
 
     def alarm_arm_away(self, code: str | None = None) -> None:
@@ -74,5 +74,5 @@ class EPSPanel(CoordinatorEntity[EPSDataUpdateCoordinator], AlarmControlPanelEnt
         # The update takes roughly 5s to be applied, so we manually update it here.
         # In case it fails server side, it will be anyway updated at next scan
         if self.coordinator.eps_api.arm_away(silent=False):
-            self.coordinator.state = STATE_ALARM_ARMED_AWAY
+            self.coordinator.state = AlarmControlPanelState.ARMED_AWAY
             self.schedule_update_ha_state()
